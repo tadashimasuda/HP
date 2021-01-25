@@ -27,8 +27,9 @@
                 <h3>Menu</h3>
                 <ul id="food_menu">
                     <h4>Food</h4>
+                    <small>クリックすると拡大されます。</small>
                     <li class="menu food">
-                        <img src="./image/pasta.jpg" alt="">
+                        <a href="" class="image"><img src="./image/pasta.jpg" alt=""></a>
                         <span>
                         画像：https://unsplash.com/photos/VO5r54j8yc8
                         </span>
@@ -37,7 +38,7 @@
                         <small>Price : 800yen</small>
                     </li>
                     <li class="menu food">
-                        <img src="./image/rice.png" alt="">
+                        <a href="" class="image"><img src="./image/rice.png" alt=""></a>
                         <p>八王子ライス</p>
                         <p>八王子で取れた白米と八王子で仕入れた水で炊き上げた絶品ライス</p>
                         <small>Price : 600yen</small>
@@ -46,29 +47,30 @@
                 <ul id="drink_menu">
                     <h4>Drink</h4>
                     <li class="menu drink">
-                        <img src="./image/coffee.jpg" alt="">
+                        <a href="" class="image"><img src="./image/coffee.jpg" alt=""></a>
                         <span>画像：https://unsplash.com/photos/tZKwLRO904E</span>
                         <p>コーヒー</p>
                         <p>厳選されたコーヒー豆から絶品のコーヒーを提供します。</p>
                         <small>Price : 300yen</small>
                     </li>
                     <li class="menu drink">
-                        <img src="./image/water.JPG" alt="">
+                        <a href="" class="image"><img src="./image/water.JPG" alt=""></a>
                         <p>八王子の水</p>
                         <p>八王子の蛇口からでる水です。</p>
                         <small>Price : 300yen</small>
                     </li>
                     <li class="menu drink">
-                        <img src="./image/tee.JPG" alt="">
+                        <a href="" class="image"><img src="./image/tee.JPG" alt=""></a>
                         <p>紅茶</p>
                         <p>厳選された紅茶です。</p>
                         <small>Price : 300yen</small>
                     </li>
                     
                 </ul>
-            <div id="cover"></div>
-                <div class="largeImg"><img src="/image/sample.png" alt="" width="500px"></div>
-            </div>
+                <div class="modal">
+                    　　<div class="bigimg"><img src="" alt="" style="height: 500px;"></div>
+                    　　<p class="close-btn"><a href="">✖</a></p>
+                </div>
         </div>
     </div>
     <footer>
@@ -79,24 +81,37 @@
 <script type="text/javascript" src="jquery.js"></script>
 <script src="jquery-ui-1.12.1/jquery-ui.js"></script>
 <script>
-    $('.menu img').each(function(){
-        $('<img>').attr('src',$(this).attr('href')); });
-        $('.menu img').bind('click',function(e){
-            e.preventDefault();
-            $('#cover').css({
-                'position':'absolute',
-                'left':0,
-                'top':0,
-                'height':$('body').height(),
-                'width':$(window).width(),
-             }).show();
-            $('.largeImg').css({
-                'position':'absolute',
-                'left':Math.floor(($(window).width()- 400)/2)+'px',
-                'top':$(window).scrollTop()+ 30+'px' }).find('img').attr('src',$(this).attr('href')).end()
-                .fadeIn(1500) });
-            $('#cover,.largeImg').bind('click',function(){
-                $('.largeImg').fadeOut('slow',function(){
-                $('#cover').hide(); });
-            });
+    // $('.menu img').each(function(){
+    //     $('<img>').attr('src',$(this).attr('href')); });
+    //     $('.menu img').bind('click',function(e){
+    //         e.preventDefault();
+    //         $('#cover').css({
+    //             'position':'absolute',
+    //             'left':0,
+    //             'top':0,
+    //             'height':$('body').height(),
+    //             'width':$(window).width(),
+    //          }).show();
+    //         $('.largeImg').css({
+    //             'position':'absolute',
+    //             'left':Math.floor(($(window).width()- 400)/2)+'px',
+    //             'top':$(window).scrollTop()+ 30+'px' }).find('img').attr('src',$(this).attr('href')).end()
+    //             .fadeIn(1500) });
+    //         $('#cover,.largeImg').bind('click',function(){
+    //             $('.largeImg').fadeOut('slow',function(){
+    //             $('#cover').hide(); });
+    //         });
+    $('.image').click(function() {
+        var imgSrc = $(this).children().attr('src');
+        $('.bigimg').children().attr('src', imgSrc);
+        $('.modal').fadeIn();
+        $('body,html').css('overflow-y', 'hidden');
+        return false
+      });
+
+$('.close-btn').click(function() {
+        $('.modal').fadeOut();
+        $('body,html').css('overflow-y', 'visible');
+        return false
+      });
 </script>
